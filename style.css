@@ -1,1 +1,909 @@
-PLACEHOLDER_CSS
+/* =====================================================
+   HCD-Vortrag · Stylesheet
+   Bereiche:
+   1. Tokens (CSS-Variablen)
+   2. Reset & Basis
+   3. Layout-Bausteine (Nav, Section, Container, Tag, Typo)
+   4. Hero (Sektion 01)
+   5. Buttons
+   6. Akkordion + Visuals (Sektion 02)
+   7. HCD-Kreislauf (Sektion 03)
+   8. Persona-Karten (Sektion 04)
+   9. Mini-Game (Sektion 05)
+   10. Rollenmatrix (Sektion 06)
+   11. Takeaway (Sektion 07)
+   12. Footer
+   ===================================================== */
+
+
+/* 1. Tokens
+   ----------------------------------------------------- */
+:root {
+  /* GD-Farben (aus grand-digital.de extrahiert) */
+  --ink: #000000;            /* color-black */
+  --ink-soft: #212b2f;       /* color-grey-900 */
+  --paper: #f4f4f4;          /* color-grey-50 */
+  --paper-2: #ededed;
+  --white: #ffffff;
+  --neon: #cfff03;           /* color-helm — das echte GD-Neon */
+  --neon-soft: #e0ff5c;
+  --lagoon: #56b099;         /* color-secondary-lagoon */
+  --blog-bg: #78c0ad;
+  --line: #212b2f;
+  --line-soft: #dedede;      /* color-grey-200 */
+  --muted: #706f75;          /* color-grey-700 */
+
+  /* Typografie wie auf der Website
+     Body  : Hind (Google Fonts)
+     Heads : Archiv Grotesk (lokal beim User), Archivo als Web-Fallback */
+  --font-body: 'Hind', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-head: 'Archiv Grotesk', 'Archivo', 'Hind', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+
+/* 2. Reset & Basis
+   ----------------------------------------------------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-head);
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+/* GD-typischer Link-Stil im Fließtext: dotted Underline,
+   beim Hover legt sich Helm-Gelb darunter */
+.text-link,
+.intro-text p a,
+.cycle-detail p a,
+.accordion-body p a,
+.role-result p a {
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  background-image: linear-gradient(transparent, transparent);
+  background-position: 0 75%;
+  background-repeat: no-repeat;
+  background-size: 100% 60%;
+  transition: background-image 0.3s ease;
+}
+.text-link:hover,
+.intro-text p a:hover,
+.cycle-detail p a:hover,
+.accordion-body p a:hover,
+.role-result p a:hover {
+  background-image: linear-gradient(var(--neon), var(--neon));
+}
+
+
+/* 3. Layout-Bausteine
+   ----------------------------------------------------- */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(244,244,244,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line-soft);
+  padding: 14px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 600;
+}
+.nav-brand { letter-spacing: 0.5px; }
+.nav-progress {
+  color: var(--muted);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.section {
+  padding: 90px 28px 110px;
+  border-bottom: 1px solid var(--line-soft);
+}
+.section.dark {
+  background: var(--ink-soft);
+  color: var(--paper);
+  border-bottom: none;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+  color: var(--ink);
+}
+.dark .tag { color: var(--neon); }
+
+h1 {
+  font-size: clamp(40px, 7vw, 88px);
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+  margin-bottom: 32px;
+}
+
+h2 {
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  margin-bottom: 28px;
+}
+
+h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  letter-spacing: -0.01em;
+}
+
+p {
+  font-size: 17px;
+  max-width: 640px;
+  margin-bottom: 16px;
+  color: var(--ink);
+}
+.dark p { color: #e2e2dd; }
+
+.lede {
+  font-size: 19px;
+  max-width: 680px;
+}
+
+.crumbs {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+
+/* 4. Hero
+   Volle Breite, links bündig, rechts statische HCD-Grafik
+   ----------------------------------------------------- */
+.hero {
+  min-height: 84vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  background: var(--paper);
+}
+
+.hero-grid {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 80px;
+  align-items: center;
+}
+@media (max-width: 900px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+.hero-content {
+  max-width: 640px;
+}
+
+.hero-visual {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.hero-visual svg {
+  width: 100%;
+  max-width: 460px;
+  height: auto;
+}
+
+.hero h1 .strike {
+  text-decoration: line-through;
+  text-decoration-thickness: 4px;
+  color: var(--muted);
+}
+
+.scroll-cue {
+  margin-top: 56px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  cursor: pointer;
+  padding: 8px 18px 8px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--ink);
+  background: transparent;
+  transition: background 0.15s ease;
+}
+.scroll-cue:hover { background: var(--neon); }
+.scroll-cue .arrow {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--neon);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+
+/* 5. Buttons (GD-Pill-Stil)
+   ----------------------------------------------------- */
+.btn {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  padding: 8px 18px;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  min-height: 32px;
+}
+.btn:hover {
+  background: var(--neon);
+}
+.btn:active { transform: none; }
+
+
+/* 6. Sektion 02 — Zwei-Spalten-Layout + Akkordion
+   ----------------------------------------------------- */
+.intro-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 80px;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .intro-grid {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+}
+
+.intro-text h2 { margin-top: 0; }
+
+.merksatz {
+  margin-top: 36px;
+  padding: 22px 26px;
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 4px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+.merksatz b {
+  color: var(--neon);
+  font-family: var(--font-head);
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* Akkordion */
+.accordion {
+  border-top: 1px solid var(--ink);
+}
+.accordion-item {
+  border-bottom: 1px solid var(--ink);
+}
+.accordion-head {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 24px 16px 24px 0;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-head);
+  color: var(--ink);
+  transition: background 0.15s ease, color 0.15s ease, padding 0.15s ease;
+}
+.accordion-head:hover {
+  background: var(--neon);
+  padding-left: 16px;
+}
+.accordion-head:hover .accordion-label,
+.accordion-head:hover .accordion-sub,
+.accordion-head:hover .accordion-icon {
+  color: var(--ink);
+}
+.accordion-item.active .accordion-head { padding-left: 0; }
+.accordion-item.active .accordion-head:hover { background: transparent; padding-left: 0; }
+
+.accordion-label {
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: 0;
+  min-width: 90px;
+  color: var(--muted);
+  transition: color 0.15s ease;
+}
+.accordion-sub {
+  flex: 1;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--muted);
+}
+.accordion-item.active .accordion-sub { color: var(--ink); }
+
+.accordion-icon {
+  font-size: 28px;
+  font-weight: 300;
+  width: 32px;
+  text-align: center;
+  color: var(--ink);
+  transition: transform 0.25s ease;
+  font-family: var(--font-body);
+}
+.accordion-item.active .accordion-icon { transform: rotate(45deg); }
+
+.accordion-body {
+  display: none;
+  padding: 4px 0 28px 0;
+}
+.accordion-item.active .accordion-body { display: block; }
+
+.accordion-body p {
+  font-size: 17px;
+  max-width: 580px;
+  margin-bottom: 14px;
+}
+.accordion-body p.accordion-meta {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 22px;
+}
+.accordion-body p.accordion-meta b { color: var(--ink); }
+
+/* Visuals innerhalb der Akkordion-Panels */
+.ui-mock {
+  background: var(--paper-2);
+  padding: 20px;
+  border-radius: 4px;
+  max-width: 360px;
+}
+.ui-mock-bar {
+  height: 28px;
+  background: var(--ink);
+  margin-bottom: 12px;
+  border-radius: 3px;
+}
+.ui-mock-line {
+  height: 8px;
+  background: #cbcac6;
+  margin-bottom: 8px;
+  border-radius: 2px;
+}
+.ui-mock-line.short { width: 60%; }
+.ui-mock-btn {
+  display: inline-block;
+  padding: 6px 14px;
+  background: var(--neon);
+  color: var(--ink);
+  border-radius: 999px;
+  font-weight: 500;
+  font-size: 13px;
+  margin-top: 8px;
+  border: 1px solid var(--ink);
+}
+
+.ux-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 360px;
+}
+.ux-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+}
+.ux-step-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--neon);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+
+/* 7. HCD-Kreislauf (rechte Spalte, große Vektorgrafik)
+   ----------------------------------------------------- */
+.cycle-svg-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto;
+  aspect-ratio: 1 / 1;
+}
+.cycle-svg-wrap svg {
+  width: 100%;
+  height: 100%;
+}
+
+.cycle-node { cursor: pointer; }
+.cycle-node:hover .node-circle {
+  fill: var(--neon) !important;
+  stroke: var(--ink) !important;
+}
+.cycle-node:hover text { fill: var(--ink) !important; }
+
+.cycle-detail {
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--line-soft);
+  padding: 32px;
+  border-radius: 4px;
+  margin-top: 36px;
+}
+.cycle-detail .num {
+  display: inline-block;
+  background: var(--ink);
+  color: var(--neon);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 40px;
+  font-weight: 800;
+  font-size: 17px;
+  margin-bottom: 18px;
+}
+.cycle-detail h3 {
+  margin-bottom: 14px;
+  color: var(--ink);
+  font-size: 26px;
+}
+.cycle-detail p {
+  color: var(--ink);
+  font-size: 18px;
+  line-height: 1.55;
+  max-width: none;
+  margin-bottom: 0;
+}
+.cycle-detail .methods {
+  margin-top: 24px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line-soft);
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+.cycle-detail .methods b { color: var(--ink); }
+
+/* Wichtig-Hinweis: zentriert, mit klarem Abstand zum Kreislauf-Block,
+   damit der Punkt nicht im Fließtext untergeht. */
+.cycle-note {
+  margin: 24px 0 0;
+  padding: 20px 24px;
+  background: var(--ink);
+  border: 1px solid #2a2a27;
+  border-left: 4px solid var(--neon);
+  border-radius: 0 4px 4px 0;
+  font-size: 15px;
+  line-height: 1.5;
+}
+.cycle-note + .cycle-note { margin-top: 12px; }
+.cycle-note-exit { border-left-color: var(--lagoon); }
+.cycle-note-exit b { color: var(--lagoon); }
+.cycle-note b {
+  color: var(--neon);
+  font-family: var(--font-head);
+  font-size: 18px;
+  display: block;
+  margin-bottom: 6px;
+  letter-spacing: 0.3px;
+}
+.cycle-note span { color: #e8e8e3; }
+
+
+/* 8. Persona-Karten (rechte Spalte, vertikal gestapelt)
+   ----------------------------------------------------- */
+.persona-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* GD-Karten: 1px Border, kein Schatten, voller Helm-Hover für klaren Kontrast */
+.persona-card {
+  background: var(--white);
+  border: 1px solid var(--ink);
+  padding: 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  user-select: none;
+  position: relative;
+}
+.persona-card:hover {
+  background: var(--neon);
+}
+.persona-card:hover .role,
+.persona-card:hover .hint {
+  color: var(--ink);
+}
+.persona-card.flipped {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
+.persona-card .role {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.persona-card.flipped .role { color: var(--neon); }
+
+.persona-card h4 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.persona-card p {
+  color: var(--ink);
+  margin-bottom: 0;
+}
+.persona-card.flipped p { color: #e2e2dd; }
+
+.persona-card .front,
+.persona-card .back { transition: opacity 0.15s ease; }
+
+.persona-card.flipped .front { display: none; }
+.persona-card .back {
+  display: none;
+  font-size: 14px;
+}
+.persona-card .back p {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+.persona-card.flipped .back { display: block; }
+
+.persona-card .hint {
+  margin-top: 14px;
+  font-size: 12px;
+  color: var(--muted);
+  font-style: italic;
+}
+.persona-card .back b.label { color: var(--neon); }
+
+
+/* 9. Mini-Game (rechte Spalte)
+   ----------------------------------------------------- */
+.game {
+  background: var(--white);
+  border: 1px solid var(--line-soft);
+  padding: 0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.game-mock {
+  background: linear-gradient(180deg, #f8f8f6 0%, #ededeb 100%);
+  padding: 40px 30px;
+  position: relative;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.game-mock-window {
+  background: var(--white);
+  border: 1px solid var(--ink);
+  border-radius: 4px;
+  overflow: hidden;
+  max-width: 460px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.game-mock-header {
+  background: #ededed;
+  padding: 8px 12px;
+  display: flex;
+  gap: 6px;
+}
+.game-mock-header span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ccc;
+}
+
+.game-mock-body { padding: 28px 28px 32px; }
+.game-mock-body h4 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.game-mock-body label {
+  display: block;
+  font-size: 11px;
+  color: #999;
+  margin-bottom: 4px;
+}
+.game-mock-body input[type="text"] {
+  width: 100%;
+  border: 1px solid #ddd;
+  padding: 8px 10px;
+  border-radius: 3px;
+  margin-bottom: 14px;
+  font-family: inherit;
+  font-size: 14px;
+}
+.game-mock-body .err {
+  color: #d32f2f;
+  font-size: 11px;
+  margin-top: -10px;
+  margin-bottom: 14px;
+}
+.game-mock-body button {
+  background: #aaaaaa;
+  color: white;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 3px;
+  font-family: inherit;
+  font-size: 14px;
+  cursor: not-allowed;
+}
+
+/* Hotspots umschließen jetzt das fehlerhafte Element direkt — kein absolutes
+   Positioning mehr. Damit klickt der Nutzer immer dort, wo der Fehler ist. */
+.hotspot {
+  display: block;
+  position: relative;
+  padding: 4px 6px;
+  margin: -4px -6px;
+  border: 2px dashed transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.hotspot.hotspot-inline {
+  display: inline-block;
+}
+.hotspot:hover {
+  border-color: var(--ink);
+  background: rgba(207,255,3,0.35);
+}
+.hotspot.found {
+  border-color: var(--ink);
+  background: rgba(207,255,3,0.6);
+}
+.hotspot.found::after {
+  content: "✓";
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 24px;
+  height: 24px;
+  background: var(--ink);
+  color: var(--neon);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+}
+/* Form-Elemente innerhalb von Hotspots fangen keine Klicks ab */
+.hotspot input,
+.hotspot button,
+.hotspot label,
+.hotspot .err {
+  pointer-events: none;
+  user-select: none;
+}
+
+.game-counter {
+  text-align: center;
+  margin-top: 18px;
+  font-size: 14px;
+  color: var(--muted);
+}
+.game-counter b {
+  font-weight: 700;
+  color: var(--ink);
+  font-size: 16px;
+}
+
+.game-results {
+  padding: 24px 30px;
+  background: var(--paper);
+}
+.game-results-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 14px;
+}
+@media (max-width: 720px) {
+  .game-results-grid { grid-template-columns: 1fr; }
+}
+.finding {
+  background: var(--white);
+  padding: 14px 16px;
+  border-left: 3px solid var(--line-soft);
+  border-radius: 0 4px 4px 0;
+  font-size: 14px;
+  opacity: 0.35;
+  transition: opacity 0.25s ease, border-left-color 0.25s ease;
+}
+.finding.revealed {
+  opacity: 1;
+  border-left-color: var(--ink);
+  background: var(--neon-soft);
+}
+.finding b {
+  display: block;
+  margin-bottom: 4px;
+}
+
+
+/* 10. Rollenmatrix (rechte Spalte)
+   ----------------------------------------------------- */
+.roles-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.audience-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Pills im GD-Stil: schmaler Border, sm-Schrift, Helm beim Hover */
+.audience-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--paper);
+  border: 1px solid var(--paper);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  font-family: inherit;
+  min-height: 32px;
+}
+.audience-pill:hover {
+  border-color: var(--ink);
+  background: var(--neon);
+  color: var(--ink);
+}
+.audience-pill.active {
+  background: var(--neon);
+  color: var(--ink);
+  border-color: var(--neon);
+}
+
+.role-result {
+  background: var(--ink);
+  border: 1px solid #2a2a27;
+  padding: 30px;
+  border-radius: 4px;
+  min-height: 160px;
+}
+.role-result h4 {
+  color: var(--neon);
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+.role-result p {
+  color: #e2e2dd;
+  margin: 0;
+  font-size: 16px;
+}
+
+
+/* 11. Takeaway
+   ----------------------------------------------------- */
+.takeaway {
+  background: var(--neon);
+  color: var(--ink);
+  border-bottom: none;
+}
+.takeaway h2 { font-size: clamp(36px, 6vw, 72px); }
+
+.takeaway-list {
+  margin-top: 40px;
+  display: grid;
+  gap: 0;
+  border-top: 2px solid var(--ink);
+}
+.takeaway-list .row {
+  padding: 22px 0;
+  border-bottom: 2px solid var(--ink);
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 20px;
+  align-items: baseline;
+}
+.takeaway-list .num {
+  font-size: 28px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+.takeaway-list .text {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+
+/* 12. Footer
+   ----------------------------------------------------- */
+.footer {
+  background: var(--ink-soft);
+  color: var(--muted);
+  padding: 50px 28px;
+  font-size: 13px;
+  text-align: center;
+}
+.footer a {
+  color: var(--neon);
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.footer a:hover { color: var(--white); }
