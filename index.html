@@ -1,1 +1,454 @@
-PLACEHOLDER_INDEX
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Was ist HCD? — Ein Vortrag in zehn Minuten</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Body: Hind (Google Fonts) · Headlines: Archiv Grotesk (lokal installiert), Archivo als Web-Fallback -->
+  <link href="https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&family=Archivo:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- =====================================================
+     Navigation (sticky, Fortschrittsanzeige rechts)
+     ===================================================== -->
+<nav class="nav">
+  <div class="nav-brand">GRAND DIGITAL · Inhouse</div>
+  <div class="nav-progress" id="progress">01 / 07</div>
+</nav>
+
+
+<!-- =====================================================
+     01 · Hero
+     Links Text bündig, rechts statische HCD-Kreislauf-Grafik
+     ===================================================== -->
+<section class="section hero" data-step="1" id="s1">
+  <div class="hero-grid">
+    <div class="hero-content">
+      <div class="tag">Inhouse-Vortrag</div>
+
+      <h1>Was ist <br>eigentlich HCD?</h1>
+      <p class="lede">Eine Einführung in die menschzentrierte Gestaltung — die Methode hinter guter User Experience. Begriffe, Prozess und Methoden, kompakt erklärt und mit Beispielen aus der Praxis.</p>
+      <a href="#s2" class="scroll-cue">
+        <span class="arrow">↓</span>
+        Los geht's
+      </a>
+    </div>
+
+    <!-- Statische HCD-Kreislauf-Vektorgrafik (nicht interaktiv) -->
+    <div class="hero-visual" aria-hidden="true">
+      <svg viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="hero-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#0a0a0a"/>
+          </marker>
+        </defs>
+
+        <!-- Zentrum -->
+        <circle cx="240" cy="240" r="62" fill="#0a0a0a"/>
+        <text x="240" y="236" text-anchor="middle" font-size="20" font-weight="800" fill="#cfff03" font-family="Archiv Grotesk, Archivo, sans-serif">HCD</text>
+        <text x="240" y="258" text-anchor="middle" font-size="9" font-weight="600" fill="#cfff03" letter-spacing="1.5">ISO 9241-210</text>
+
+        <!-- Verbindungs-Pfeile (im Uhrzeigersinn) -->
+        <path d="M 240 80 Q 370 100 400 240" fill="none" stroke="#0a0a0a" stroke-width="1.5" marker-end="url(#hero-arrow)"/>
+        <path d="M 400 240 Q 370 380 240 400" fill="none" stroke="#0a0a0a" stroke-width="1.5" marker-end="url(#hero-arrow)"/>
+        <path d="M 240 400 Q 110 380 80 240"  fill="none" stroke="#0a0a0a" stroke-width="1.5" marker-end="url(#hero-arrow)"/>
+        <path d="M 80 240  Q 110 100 240 80"  fill="none" stroke="#0a0a0a" stroke-width="1.5" marker-end="url(#hero-arrow)"/>
+
+        <!-- Knoten oben: Kontext verstehen -->
+        <circle cx="240" cy="60" r="52" fill="#cfff03" stroke="#0a0a0a" stroke-width="2"/>
+        <text x="240" y="56" text-anchor="middle" font-size="12" font-weight="700" fill="#0a0a0a" font-family="Archiv Grotesk, Archivo, sans-serif">Kontext</text>
+        <text x="240" y="72" text-anchor="middle" font-size="12" font-weight="700" fill="#0a0a0a" font-family="Archiv Grotesk, Archivo, sans-serif">verstehen</text>
+
+        <!-- Knoten rechts: Anforderungen festlegen -->
+        <circle cx="420" cy="240" r="52" fill="#cfff03" stroke="#0a0a0a" stroke-width="2"/>
+        <text x="420" y="236" text-anchor="middle" font-size="11" font-weight="700" fill="#0a0a0a" font-family="Archiv Grotesk, Archivo, sans-serif">Anforderungen</text>
+        <text x="420" y="252" text-anchor="middle" font-size="12" font-weight="700" fill="#0a0a0a" font-family="Archiv Grotesk, Archivo, sans-serif">festlegen</text>
+
+        <!-- Knoten unten: Lösungen gestalten -->
+        <circle cx="240" cy="420" r="52" fill="#cfff03" stroke="#0a0a0a" stroke-width="2"/>
+        <text x="240" y="416" text-anchor="middle" font-size="12" font-weight="700" fill="#0a0a0a" font-family="Archiv Grotesk, Archivo, sans-serif">Lösungen</text>
+        <text x="240" y="432" text-anchor="middle" font-size="12" font-weight="700" fill="#0a0a0a" font-family="Archiv Grotesk, Archivo, sans-serif">gestalten</text>
+
+        <!-- Knoten links: Lösung evaluieren -->
+        <circle cx="60" cy="240" r="52" fill="#cfff03" stroke="#0a0a0a" stroke-width="2"/>
+        <text x="60" y="236" text-anchor="middle" font-size="12" font-weight="700" fill="#0a0a0a" font-family="Archiv Grotesk, Archivo, sans-serif">Lösung</text>
+        <text x="60" y="252" text-anchor="middle" font-size="12" font-weight="700" fill="#0a0a0a" font-family="Archiv Grotesk, Archivo, sans-serif">evaluieren</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+
+<!-- =====================================================
+     02 · UI vs UX vs HCD
+     Links: Headline + Body · Rechts: Akkordion (klickbar)
+     ===================================================== -->
+<section class="section" data-step="2" id="s2">
+  <div class="container">
+    <div class="intro-grid">
+
+      <!-- Linke Spalte: Headline + Body -->
+      <div class="intro-text">
+        <div class="tag">Begriffe sortieren</div>
+        <h2>UI, UX, HCD —<br>drei Begriffe, drei Ebenen.</h2>
+        <p class="lede">Die drei Begriffe werden im Alltag häufig synonym verwendet, beschreiben aber unterschiedliche Aspekte: UI bezeichnet die Benutzungsschnittstelle, UX das Nutzungserlebnis vor, während und nach der Benutzung, HCD den Gestaltungsprozess, der zu beidem führt.</p>
+        <div class="merksatz">
+          <b>Merksatz:</b>
+          UI beschreibt die Oberfläche, UX die gesamte Erfahrung, HCD den methodischen Weg dorthin.
+        </div>
+      </div>
+
+      <!-- Rechte Spalte: Akkordion -->
+      <div class="accordion">
+
+        <div class="accordion-item active" data-acc="ui">
+          <button type="button" class="accordion-head">
+            <span class="accordion-label">UI</span>
+            <span class="accordion-sub">User Interface · Benutzungsschnittstelle</span>
+            <span class="accordion-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="accordion-body">
+            <p>Das User Interface ist die Schnittstelle, über die ein Benutzer ein interaktives System bedient. Dazu gehören die sichtbaren Elemente wie Buttons, Eingabefelder, Texte, Farben und Abstände sowie die Reaktionen auf Eingaben.</p>
+            <p class="accordion-meta"><b>Bei uns:</b> Hyvä-Komponenten, Gutenberg-Blöcke, Fluid-Templates, Tokens im Design-System.</p>
+            <div class="ui-mock">
+              <div class="ui-mock-bar"></div>
+              <div class="ui-mock-line"></div>
+              <div class="ui-mock-line"></div>
+              <div class="ui-mock-line short"></div>
+              <div class="ui-mock-btn">Jetzt buchen</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item" data-acc="ux">
+          <button type="button" class="accordion-head">
+            <span class="accordion-label">UX</span>
+            <span class="accordion-sub">User Experience · Nutzererlebnis</span>
+            <span class="accordion-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="accordion-body">
+            <p>User Experience berücksichtigt die Erwartungshaltung der Benutzer vor der Benutzung, ihre Zufriedenstellung während der Benutzung und die Erfüllung ihrer Erwartungen nach der Benutzung.</p>
+            <p class="accordion-meta"><b>Abgrenzung zur Usability:</b> Usability beschreibt nur, wie effektiv, effizient und zufriedenstellend ein System während der Benutzung wirkt. UX schließt das Davor und Danach mit ein.</p>
+            <div class="ux-steps">
+              <div class="ux-step"><span class="ux-step-num">1</span><span>Erwartung vor der Nutzung</span></div>
+              <div class="ux-step"><span class="ux-step-num">2</span><span>Erleben während der Nutzung</span></div>
+              <div class="ux-step"><span class="ux-step-num">3</span><span>Beurteilung nach der Nutzung</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item" data-acc="hcd">
+          <button type="button" class="accordion-head">
+            <span class="accordion-label">HCD</span>
+            <span class="accordion-sub">Human-Centred Design · Menschzentrierte Gestaltung</span>
+            <span class="accordion-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="accordion-body">
+            <p>Menschzentrierte Gestaltung ist ein gestalterischer Ansatz für die Entwicklung interaktiver Systeme, der sich auf die Benutzung des Systems konzentriert und Wissen und Methoden aus den Bereichen Usability und User Experience anwendet.</p>
+            <p>Sie basiert auf einem expliziten Verständnis von Benutzern, Zielen, Aufgaben, Ressourcen und Umgebungen. Benutzer sind während der gesamten Gestaltung beteiligt. Die Gestaltung wird durch Nutzungsanforderungen gesteuert und durch Usability-Evaluierung verfeinert.</p>
+            <p class="accordion-meta"><b>Norm:</b> ISO 9241-210. Der Prozess ist iterativ — die Verfeinerung wird so lange fortgesetzt, bis die Nutzungsanforderungen erfüllt sind.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =====================================================
+     03 · HCD-Kreislauf
+     Links: Beschreibung + Detail-Karte (wechselt beim Klick)
+     Rechts: großer klickbarer Kreis
+     ===================================================== -->
+<section class="section dark" data-step="3" id="s3">
+  <div class="container">
+    <div class="intro-grid">
+
+      <!-- Linke Spalte -->
+      <div class="intro-text">
+        <div class="tag">Der HCD-Prozess</div>
+        <h2>Die vier Aktivitäten<br>nach ISO 9241-210.</h2>
+        <p class="lede" style="color:#e2e2dd;">Die Norm beschreibt vier ineinandergreifende Aktivitäten. Der Einstieg ist projektabhängig — entscheidend ist ein umfassendes Verständnis des Nutzungskontextes. Nach der Evaluierung sind Iterationen zu jeder vorhergehenden Aktivität möglich. Klick einen Knoten an, um die Aktivität anzuzeigen.</p>
+
+        <div class="cycle-detail" id="cycle-detail">
+          <span class="num">1</span>
+          <h3>Nutzungskontext verstehen</h3>
+          <p>In dieser Aktivität wird beschrieben, wer die Benutzer sind, welche Ziele und Aufgaben sie haben, mit welchen Mitteln und in welcher Umgebung sie das System verwenden. Grundlage dafür sind Beobachtungen, Interviews und vorhandene Dokumente.</p>
+          <div class="methods">
+            <b>HCD-Ergebnisse:</b> Nutzungskontextbeschreibung, Benutzergruppenprofile, Personas, Aufgabenmodelle, Ist-Szenarien, User Journey Maps.
+          </div>
+        </div>
+
+        <div class="cycle-note">
+          <b>Iterativ:</b> <span>Ein menschzentrierter Gestaltungsprozess ist iterativ. Aus der Evaluierung kann zu jeder der vorhergehenden Aktivitäten zurückgekehrt werden — zum Nutzungskontext, zu den Anforderungen oder zur Gestaltungslösung.</span>
+        </div>
+
+        <div class="cycle-note cycle-note-exit">
+          <b>Exit-Bedingung:</b> <span>Der Prozess endet, wenn die Gestaltungslösung die Nutzungsanforderungen erfüllt.</span>
+        </div>
+      </div>
+
+      <!-- Rechte Spalte: HCD-Kreislauf nach ISO 9241-210
+           Sequenz-Pfeile außen im Uhrzeigersinn.
+           Iterations-Linien gestrichelt vom Evaluations-Knoten durchs Innere
+           zu Kontext, Anforderungen, Lösungen — ohne Pfeilspitzen.
+           Exit-Bedingung steht als Text unter der Grafik (cycle-exit-note). -->
+      <div class="cycle-svg-wrap">
+        <svg viewBox="0 0 620 620" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#4a4a47"/>
+            </marker>
+          </defs>
+
+          <!-- Sequenz-Pfeile (Volllinie) im Uhrzeigersinn -->
+          <path d="M 335 95  Q 500 130 525 310" fill="none" stroke="#4a4a47" stroke-width="1.5" marker-end="url(#arrow)"/>
+          <path d="M 525 310 Q 500 490 335 525" fill="none" stroke="#4a4a47" stroke-width="1.5" marker-end="url(#arrow)"/>
+          <path d="M 285 525 Q 120 490 95 310"  fill="none" stroke="#4a4a47" stroke-width="1.5" marker-end="url(#arrow)"/>
+          <path d="M 95 310  Q 120 130 285 95"  fill="none" stroke="#4a4a47" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+          <!-- Iterations-Linien (gestrichelt, ohne Pfeilspitze) vom Eval-Knoten -->
+          <path d="M 155 275 Q 235 190 250 132" fill="none" stroke="#9a9a93" stroke-width="1.4" stroke-dasharray="5 5"/>
+          <path d="M 155 310 Q 310 250 470 290" fill="none" stroke="#9a9a93" stroke-width="1.4" stroke-dasharray="5 5"/>
+          <path d="M 155 345 Q 235 430 250 488" fill="none" stroke="#9a9a93" stroke-width="1.4" stroke-dasharray="5 5"/>
+
+          <!-- Iteration-Label im Innenbereich -->
+          <text x="310" y="318" text-anchor="middle" font-size="11" font-weight="600" fill="#8a8a83" font-family="Hind, sans-serif" letter-spacing="1.5">ITERATION</text>
+
+          <!-- Knoten 1: Kontext verstehen (oben, aktiv) -->
+          <g class="cycle-node active" data-phase="1">
+            <circle class="node-circle" cx="310" cy="95" r="80" fill="#cfff03" stroke="#0a0a0a" stroke-width="2"/>
+            <text x="310" y="90" text-anchor="middle" font-size="18" font-weight="700" fill="#0a0a0a" font-family="Archiv Grotesk, Archivo, sans-serif" style="pointer-events:none;">Kontext</text>
+            <text x="310" y="113" text-anchor="middle" font-size="18" font-weight="700" fill="#0a0a0a" font-family="Archiv Grotesk, Archivo, sans-serif" style="pointer-events:none;">verstehen</text>
+          </g>
+
+          <!-- Knoten 2: Anforderungen festlegen (rechts) -->
+          <g class="cycle-node" data-phase="2">
+            <circle class="node-circle" cx="525" cy="310" r="80" fill="#1a1a1a" stroke="#6a6a67" stroke-width="2"/>
+            <text x="525" y="304" text-anchor="middle" font-size="15" font-weight="700" fill="#f3f3f1" font-family="Archiv Grotesk, Archivo, sans-serif" style="pointer-events:none;">Anforderungen</text>
+            <text x="525" y="326" text-anchor="middle" font-size="18" font-weight="700" fill="#f3f3f1" font-family="Archiv Grotesk, Archivo, sans-serif" style="pointer-events:none;">festlegen</text>
+          </g>
+
+          <!-- Knoten 3: Lösungen gestalten (unten) -->
+          <g class="cycle-node" data-phase="3">
+            <circle class="node-circle" cx="310" cy="525" r="80" fill="#1a1a1a" stroke="#6a6a67" stroke-width="2"/>
+            <text x="310" y="520" text-anchor="middle" font-size="18" font-weight="700" fill="#f3f3f1" font-family="Archiv Grotesk, Archivo, sans-serif" style="pointer-events:none;">Lösungen</text>
+            <text x="310" y="543" text-anchor="middle" font-size="18" font-weight="700" fill="#f3f3f1" font-family="Archiv Grotesk, Archivo, sans-serif" style="pointer-events:none;">gestalten</text>
+          </g>
+
+          <!-- Knoten 4: Lösung evaluieren (links) -->
+          <g class="cycle-node" data-phase="4">
+            <circle class="node-circle" cx="95" cy="310" r="80" fill="#1a1a1a" stroke="#6a6a67" stroke-width="2"/>
+            <text x="95" y="304" text-anchor="middle" font-size="18" font-weight="700" fill="#f3f3f1" font-family="Archiv Grotesk, Archivo, sans-serif" style="pointer-events:none;">Lösung</text>
+            <text x="95" y="326" text-anchor="middle" font-size="18" font-weight="700" fill="#f3f3f1" font-family="Archiv Grotesk, Archivo, sans-serif" style="pointer-events:none;">evaluieren</text>
+          </g>
+        </svg>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- =====================================================
+     04 · Methoden in der Praxis (Karten zum Aufdecken)
+     Links: Beschreibung · Rechts: vertikal gestapelte Karten
+     ===================================================== -->
+<section class="section" data-step="4" id="s4">
+  <div class="container">
+    <div class="intro-grid">
+
+      <div class="intro-text">
+        <div class="tag">Methoden</div>
+        <h2>Drei zentrale Werkzeuge<br>der menschzentrierten Gestaltung.</h2>
+        <p class="lede">Persona, User Journey Map und Usability-Test zählen zu den wichtigsten Methoden im HCD-Prozess. Die Definitionen stammen aus dem CPUX-F Curriculum des UXQB e.V. Klick auf eine Karte, um die Definition zu sehen.</p>
+      </div>
+
+      <div class="persona-grid">
+
+        <div class="persona-card" data-flip="1">
+          <div class="role">Methode 01</div>
+          <div class="front">
+            <h4>Persona</h4>
+            <p style="font-size:14px;">Eine Beschreibung eines konstruierten, aber realistischen Benutzers und was dieser bei der Benutzung eines interaktiven Systems beabsichtigt.</p>
+            <div class="hint">Klick für Details</div>
+          </div>
+          <div class="back">
+            <h4>Persona</h4>
+            <p>Personas sind keine Beschreibungen real existierender Personen, sondern realistische Darstellungen von Benutzern, die auf Basis von Beobachtungen oder Interviews erstellt werden.</p>
+            <p><b class="label">Zweck:</b> Bei den Interessenvertretern Empathie für die Benutzer schaffen. Eine Persona verfügt typischerweise über einen Namen, Alter, Hintergrundinformationen, Ziele und Wünsche.</p>
+          </div>
+        </div>
+
+        <div class="persona-card" data-flip="1">
+          <div class="role">Methode 02</div>
+          <div class="front">
+            <h4>User Journey Map</h4>
+            <p style="font-size:14px;">Ein Überblick über die Berührungspunkte (Touchpoints), an denen Benutzer mit dem interaktiven System und der bereitstellenden Organisation interagieren.</p>
+            <div class="hint">Klick für Details</div>
+          </div>
+          <div class="back">
+            <h4>User Journey Map</h4>
+            <p>Die Map zeigt die Reise eines Benutzers über mehrere Berührungspunkte hinweg — vor, während und nach der Nutzung des Systems.</p>
+            <p><b class="label">Zweck:</b> Brüche, Lücken und kritische Momente entlang der Reise sichtbar machen. Grundlage für Erfordernisse und Nutzungsanforderungen.</p>
+          </div>
+        </div>
+
+        <div class="persona-card" data-flip="1">
+          <div class="role">Methode 03</div>
+          <div class="front">
+            <h4>Usability-Test</h4>
+            <p style="font-size:14px;">Eine Usability-Evaluierung, bei der repräsentative Benutzer bestimmte Aufgaben mit dem interaktiven System ausführen.</p>
+            <div class="hint">Klick für Details</div>
+          </div>
+          <div class="back">
+            <h4>Usability-Test</h4>
+            <p>Ein Usability-Test zeigt, was repräsentative Benutzer mit dem System erreichen können, wenn sie repräsentative Aufgaben ausführen. Persönliche Meinungen der Benutzer sind nicht Teil des Tests.</p>
+            <p><b class="label">Ergebnis:</b> Erfassung und Analyse von Usability-Problemen sowie die Messung von Effektivität, Effizienz und Zufriedenstellung.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =====================================================
+     05 · Mini-Game (Finde die Usability-Fehler)
+     Links: Beschreibung · Rechts: Spiel + Auflösung
+     ===================================================== -->
+<section class="section" data-step="5" id="s5" style="background: var(--paper-2);">
+  <div class="container">
+    <div class="intro-grid">
+
+      <div class="intro-text">
+        <div class="tag">Übung</div>
+        <h2>Sechs typische<br>Usability-Probleme.</h2>
+        <p class="lede">In diesem Anmeldeformular sind sechs verbreitete Usability-Schwächen versteckt. Identifiziere sie durch Anklicken. Zu jedem Treffer wird die Erklärung sichtbar.</p>
+      </div>
+
+      <div class="game">
+      <div class="game-mock">
+        <div class="game-mock-window">
+          <div class="game-mock-header"><span></span><span></span><span></span></div>
+          <div class="game-mock-body">
+            <h4>Anmeldung</h4>
+
+            <label>Email</label>
+            <input type="text" value="" tabindex="-1">
+            <div class="hotspot" data-flaw="1" title="Fehlerbalken vor Eingabe">
+              <div class="err">Fehler: ungültig</div>
+            </div>
+
+            <div class="hotspot" data-flaw="2" title="Pwd statt Passwort">
+              <label>Pwd</label>
+            </div>
+            <div class="hotspot" data-flaw="3" title="Passwort als Klartext">
+              <input type="text" value="" tabindex="-1">
+            </div>
+
+            <label>Geburtsdatum</label>
+            <div class="hotspot" data-flaw="4" title="Geburtsdatum als Freitext">
+              <input type="text" placeholder="TT.MM.JJJJ" tabindex="-1">
+            </div>
+
+            <div class="hotspot" data-flaw="5" title="Juristensprache in Checkbox">
+              <label>Ich akzeptiere AGB §4 Abs. 2 und stimme dem Verarbeitungshinweis zu</label>
+              <input type="checkbox" tabindex="-1" style="width:auto; margin-bottom:14px;">
+            </div>
+
+            <div class="hotspot hotspot-inline" data-flaw="6" title="Button heißt OK">
+              <button tabindex="-1">OK</button>
+            </div>
+          </div>
+        </div>
+        <div class="game-counter">Gefunden: <b id="flaw-count">0</b> / 6</div>
+      </div>
+
+      <div class="game-results">
+        <b style="font-size: 13px; letter-spacing: 1px; text-transform: uppercase;">Auflösung</b>
+        <div class="game-results-grid">
+          <div class="finding" data-flaw="1"><b>1. Fehler vor der Eingabe</b>Validierung zeigt „ungültig“, obwohl niemand getippt hat. Frustriert sofort.</div>
+          <div class="finding" data-flaw="2"><b>2. Abkürzung „Pwd“</b>Spart drei Zeichen, kostet Verständnis. Wörter ausschreiben.</div>
+          <div class="finding" data-flaw="3"><b>3. Passwort sichtbar</b>Falscher Input-Typ. Im Großraumbüro ein Drama.</div>
+          <div class="finding" data-flaw="4"><b>4. Datum als Freitext</b>TT.MM.JJJJ ist nicht international und nicht barrierefrei. Datepicker oder drei Felder.</div>
+          <div class="finding" data-flaw="5"><b>5. AGB-Wortwurst</b>„§4 Abs. 2“ liest niemand. Klartext, Link zum Original, Häkchen separat.</div>
+          <div class="finding" data-flaw="6"><b>6. Button heißt „OK“</b>Was passiert beim Klick? „Konto anlegen“ ist konkret. Grau wirkt inaktiv.</div>
+        </div>
+      </div>
+    </div>
+
+    </div><!-- /.intro-grid -->
+  </div>
+</section>
+
+
+<!-- =====================================================
+     06 · Rollenmatrix
+     Links: Beschreibung · Rechts: Pills + Ergebnis
+     ===================================================== -->
+<section class="section dark" data-step="6" id="s6">
+  <div class="container">
+    <div class="intro-grid">
+
+      <div class="intro-text">
+        <div class="tag">Beitrag der Rollen</div>
+        <h2>HCD ist eine<br>Teamaufgabe.</h2>
+        <p class="lede" style="color:#e2e2dd;">Im optimalen HCD-Prozess tragen alle Rollen zur menschzentrierten Qualität bei. Klick eine Rolle an, um ihren Beitrag zu den vier Aktivitäten zu sehen.</p>
+      </div>
+
+      <div class="roles-wrap">
+        <div class="audience-row">
+          <button type="button" class="audience-pill active" data-role="pm">Projektmanagement</button>
+          <button type="button" class="audience-pill" data-role="dev">Entwicklung</button>
+          <button type="button" class="audience-pill" data-role="design">Design</button>
+          <button type="button" class="audience-pill" data-role="hr">HR</button>
+          <button type="button" class="audience-pill" data-role="bo">Backoffice / Operations</button>
+          <button type="button" class="audience-pill" data-role="sales">Sales / Beratung</button>
+        </div>
+
+        <div class="role-result" id="role-result">
+          <h4>Projektmanagement</h4>
+          <p>Plant die menschzentrierte Gestaltung über den Projektverlauf hinweg. Verankert Iterationen, Nutzerbeteiligung und Usability-Evaluierung im Zeit- und Budgetplan. Vertritt die Nutzungsanforderungen gegenüber konkurrierenden Projektzielen und stellt sicher, dass die HCD-Aktivitäten aufeinander aufbauen.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- =====================================================
+     07 · Takeaway (Schluss-Liste auf Neon-Hintergrund)
+     ===================================================== -->
+<section class="section takeaway" data-step="7" id="s7">
+  <div class="container">
+    <div class="tag" style="color: var(--ink);">Zum Mitnehmen</div>
+    <h2>Fünf Punkte,<br>die hängen bleiben sollten.</h2>
+    <div class="takeaway-list">
+      <div class="row"><div class="num">01</div><div class="text">UI bezeichnet die Benutzungsschnittstelle, UX das Nutzungserlebnis, HCD den Gestaltungsprozess dazwischen.</div></div>
+      <div class="row"><div class="num">02</div><div class="text">Der HCD-Prozess nach ISO 9241-210 besteht aus vier Aktivitäten und ist iterativ angelegt.</div></div>
+      <div class="row"><div class="num">03</div><div class="text">Benutzer sind während der gesamten Gestaltung beteiligt — durch Beobachtung, Interview und Evaluierung.</div></div>
+      <div class="row"><div class="num">04</div><div class="text">Menschzentrierte Qualität ist das Hauptziel und entsteht durch Zusammenarbeit aller Rollen.</div></div>
+      <div class="row"><div class="num">05</div><div class="text">Der Prozess endet, wenn die Gestaltungslösung die Nutzungsanforderungen erfüllt.</div></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =====================================================
+     Footer
+     ===================================================== -->
+<footer class="footer">
+  GRAND DIGITAL · Wissenswelt · <a href="#s1">↑ Zurück nach oben</a>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
